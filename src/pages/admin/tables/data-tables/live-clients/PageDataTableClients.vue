@@ -50,14 +50,14 @@
         <VaPopover message="Add Remarks">
           <VaButton preset="plain" icon="insert_comment" @click="showRemarks(rowIndex)" />
         </VaPopover>
-        <VaPopover message="Change Status">
+        <!-- <VaPopover message="Change Status">
           <VaButton preset="plain" icon="call_split" @click="gotoProfile(rowIndex)" />
-        </VaPopover>
+        </VaPopover> -->
         <VaPopover message="Download Excel">
-          <VaButton preset="plain" icon="file_download" @click="generateExcel(rowIndex)" />
+          <VaButton size="large" preset="plain" icon="file_download" @click="generateExcel(rowIndex)" />
         </VaPopover>
         <VaPopover message="Client's Profile">
-          <VaButton preset="plain" icon="output" @click="gotoProfile(rowIndex)" />
+          <VaButton size="large" preset="plain" icon="output" @click="gotoProfile(rowIndex)" />
         </VaPopover>
       </template>
     </VaDataTable>

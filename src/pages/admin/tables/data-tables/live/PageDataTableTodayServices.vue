@@ -36,7 +36,7 @@
       <!-- <template #item.full_name="{ item }">{{ item.first_name }} {{ item.last_name }}</template> -->
 
       <template #cell(actions)="{ rowIndex }">
-        <VaButton preset="plain" icon="output" @click="gotoProfile(rowIndex)" />
+        <VaButton size="large" preset="plain" icon="output" @click="gotoProfile(rowIndex)" />
       </template>
     </VaDataTable>
     <va-card title="filter" class="bg-white p-5 w-[100%]">
