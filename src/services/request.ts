@@ -128,3 +128,17 @@ export const getClientServices = async (id: any) => {
 
   return res
 }
+
+export const getClientProfile = async (id: any) => {
+  const res = await fetchWrapper.get(`${baseUrl}${APIs.GET_CLIENTS_PROFILE}/${id}`, null)
+
+  return res
+}
+
+export const getClientDocuments = async (id: any) => {
+  const res = await fetchWrapper.get(`${baseUrl}${APIs.GET_DOCUMENTS_BY_CLIENT}/${id}`, null)
+
+  return res
+}
+
+

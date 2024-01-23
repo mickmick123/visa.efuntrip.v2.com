@@ -25,7 +25,7 @@
       </template>
     </VaDataTable>
     <va-card title="filter" class="bg-white p-5 w-[100%]">
-      <VaPagination v-model="currentPage" :pages="pages" />
+      <VaPagination visible-pages="10" v-model="currentPage" :pages="pages" />
     </va-card>
   </va-card>
 </template>

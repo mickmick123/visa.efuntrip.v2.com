@@ -63,7 +63,7 @@
     </VaDataTable>
     <VaDataTable loading :items="[{ 'Manage Clients': 'Fetching Data' }]" v-else> </VaDataTable>
     <va-card title="filter" class="bg-white p-5 w-[100%]">
-      <VaPagination v-model="currentPage" :pages="pages" />
+      <VaPagination visible-pages="10" v-model="currentPage" :pages="pages" />
     </va-card>
   </va-card>
   <VaModal
@@ -87,6 +87,7 @@
   import moment from 'moment'
   import debounce from 'lodash/debounce.js'
   import { useToast } from 'vuestic-ui'
+  import router from '../../../../../router'
   import { addClientRemarks, exportExcelClientSummary, getClientServices } from '../../../../../services/request'
   const options = ref([
     { label: 'Manila', value: 1 },
@@ -178,7 +179,8 @@
   }, 600)
 
   const gotoProfile = (row: any) => {
-    console.log(listClientsPaginate.value[row])
+    const rpath = router.resolve({path:`/admin/clients/profile/${listClientsPaginate.value[row].id}`})
+    window.open(rpath.href, '_blank');
   }
 
   const dateInput = ref(moment(new Date()).format('YYYY-MM-DD'))

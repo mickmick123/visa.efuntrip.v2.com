@@ -79,6 +79,14 @@ const routes: Array<RouteRecordRaw> = [
               wikiLink: 'https://github.com/epicmaxco/vuestic-admin/wiki/Progress-Bars',
             },
           },
+          {
+            name: 'profile',
+            path: 'profile/:id',
+            component: () => import('../pages/admin/clients/Profile.vue'),
+            meta: {
+              wikiLink: 'https://github.com/epicmaxco/vuestic-admin/wiki/Progress-Bars',
+            },
+          },
         ],
       },
       {

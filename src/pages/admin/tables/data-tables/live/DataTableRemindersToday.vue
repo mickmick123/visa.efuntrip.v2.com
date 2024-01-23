@@ -13,7 +13,7 @@
         <tr>
           <td colspan="6">
             <div class="flex justify-end mb-4 mt-2 mr-5">
-              <VaPagination v-model="currentPage" :pages="pages" />
+              <VaPagination visible-pages="10" v-model="currentPage" :pages="pages" />
             </div>
           </td>
         </tr>
