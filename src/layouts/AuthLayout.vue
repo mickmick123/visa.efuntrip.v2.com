@@ -2,7 +2,7 @@
   <div class="auth-layout grid grid-cols-12 content-center">
     <div class="flex col-span-12 p-4 justify-center">
       <router-link class="py-5 justify-center flex" to="/">
-        <vuestic-logo height="32" />
+        <vuestic-logo-funtrip height="64" />
       </router-link>
     </div>
 
@@ -28,12 +28,12 @@
 </template>
 
 <script>
-  import VuesticLogo from '../components/VuesticLogo.vue'
   import { useI18n } from 'vue-i18n'
+  import VuesticLogoFuntrip from '../components/VuesticLogoFuntrip.vue'
 
   export default {
     name: 'AuthLayout',
-    components: { VuesticLogo },
+    components: { VuesticLogoFuntrip },
     setup() {
       const { t } = useI18n()
       return { t }

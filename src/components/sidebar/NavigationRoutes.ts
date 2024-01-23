@@ -12,11 +12,65 @@ export default {
   },
   routes: [
     {
-      name: 'dashboard',
       displayName: 'menu.dashboard',
       meta: {
         icon: 'vuestic-iconset-dashboard',
       },
+      disabled: true,
+      children: [
+        {
+          name: 'home',
+          displayName: 'menu.home',
+        },
+        {
+          name: 'today',
+          displayName: 'menu.todayServices',
+        },
+        {
+          name: 'onProcess',
+          displayName: 'menu.onProcess',
+        },
+        {
+          name: 'pending',
+          displayName: 'menu.pending',
+        },
+      ],
+    },
+    {
+      name: 'clients',
+      displayName: 'menu.clients',
+      meta: {
+        icon: 'vuestic-iconset-user',
+      },
+      disabled: true,
+      children: [
+        {
+          name: 'list',
+          displayName: 'menu.clientList',
+        },
+        {
+          name: 'add-client',
+          displayName: 'menu.clientAdd',
+        },
+      ],
+    },
+    {
+      name: 'settings',
+      displayName: 'menu.settings',
+      meta: {
+        icon: 'gear',
+      },
+      disabled: true,
+      children: [
+        {
+          name: 'contact-type',
+          displayName: 'menu.contactType',
+        },
+        {
+          name: 'internal-users',
+          displayName: 'menu.internalUsers',
+        },
+      ],
     },
     {
       name: 'statistics',

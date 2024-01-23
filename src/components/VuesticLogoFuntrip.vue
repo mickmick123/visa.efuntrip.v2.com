@@ -1,7 +1,6 @@
 <template>
   <div class="logo-flex">
     <img :src="logo" alt="" class="logo-img" />
-    <h1 class="logoTag max-sm:hidden">FUNTRIP</h1>
   </div>
 </template>
 
@@ -11,7 +10,7 @@
 
 <style scoped>
   .logo-img {
-    height: 3rem;
+    height: 10rem;
     width: auto;
   }
   .logo-flex {

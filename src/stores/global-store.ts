@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia'
+import { fetchWrapper } from '../helpers'
+import { APIs } from '../services/apis'
 
 export const useGlobalStore = defineStore('global', {
   state: () => {
     return {
       isSidebarMinimized: false,
-      userName: 'Vasili S',
     }
   },
 
@@ -12,9 +13,8 @@ export const useGlobalStore = defineStore('global', {
     toggleSidebar() {
       this.isSidebarMinimized = !this.isSidebarMinimized
     },
-
-    changeUserName(userName: string) {
-      this.userName = userName
-    },
+    // changeUserName(userName: string) {
+    //   this.userName = userName
+    // },
   },
 })

@@ -4,33 +4,25 @@
   </va-card>
 </template>
 
-<script>
+<script setup lang="ts">
+  import { useI18n } from 'vue-i18n'
   import users from '../data/users.json'
-
-  export default {
-    data() {
-      return {
-        users: users,
-      }
-    },
-    computed: {
-      fields() {
-        return [
-          {
-            name: 'fullName',
-            title: this.t('tables.headings.name'),
-          },
-          {
-            name: 'email',
-            title: this.t('tables.headings.email'),
-          },
-          {
-            name: 'country',
-            title: this.t('tables.headings.country'),
-          },
-        ]
+  const { t } = useI18n()
+  const fields = () => {
+    return [
+      {
+        name: 'fullName',
+        title: t('tables.headings.name'),
       },
-    },
+      {
+        name: 'email',
+        title: t('tables.headings.email'),
+      },
+      {
+        name: 'country',
+        title: t('tables.headings.country'),
+      },
+    ]
   }
 </script>
 

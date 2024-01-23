@@ -6,7 +6,7 @@
     <!-- <settings-dropdown class="app-navbar-actions__item" /> -->
     <language-dropdown class="app-navbar-actions__item" />
     <profile-dropdown class="app-navbar-actions__item app-navbar-actions__item--profile">
-      <span>{{ userName }}</span>
+      <span v-if="user && user.first_name !== 'Undefined'">{{ ucwords(user.first_name + ' ' + user.last_name) }}</span>
     </profile-dropdown>
   </div>
 </template>
@@ -17,14 +17,16 @@
   import NotificationDropdown from './dropdowns/NotificationDropdown.vue'
   import MessageDropdown from './dropdowns/MessageDropdown.vue'
   import ColorDropdown from './dropdowns/ColorDropdown.vue'
+  import { useUsersStore } from '../../../stores/userStore'
+  import { storeToRefs } from 'pinia'
+  const User: any = useUsersStore()
+  const { user } = storeToRefs(User)
 
   withDefaults(
     defineProps<{
-      userName?: string
       isTopBar?: boolean
     }>(),
     {
-      userName: '',
       isTopBar: false,
     },
   )
@@ -33,6 +35,20 @@
     (e: 'update:isTopBar', isTopBar: boolean): void
   }>()
 
+  const ucwords = (str: any) => {
+    try {
+      if (str !== 'undefined undefined') {
+        return str.toLowerCase().replace(/\b[a-z]/g, function (letter: any) {
+          return letter.toUpperCase()
+        })
+      } else {
+        return ''
+      }
+    } catch (error) {
+      console.log(error)
+      return ''
+    }
+  }
   // const isTopBarProxy = computed({
   //   get() {
   //     return props.isTopBar

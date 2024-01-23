@@ -1,8 +1,15 @@
 {
+  "client": {
+    "personalInfo": "Personal Information",
+    "visaInfo": "Visa Information",
+    "contactInfo": "Contact Information",
+    "accountInfo": "Account Information"
+  },
   "auth": {
     "agree": "I agree to",
     "createAccount": "Create account",
     "createNewAccount": "Create New Account",
+    "confirm": "Confirm Password",
     "email": "Email",
     "login": "Login",
     "password": "Password",
@@ -10,7 +17,10 @@
     "sign_up": "Sign Up",
     "keep_logged_in": "Keep me logged in",
     "termsOfUse": "Terms of Use.",
-    "reset_password": "Reset password"
+    "reset_password": "Reset password",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "middle_name": "Middle name"
   },
   "404": {
     "title": "This page’s gone fishing.",
@@ -137,7 +147,13 @@
       "viewLibrary": "View Library",
       "commits": "commits",
       "components": "components",
-      "teamMembers": "team members"
+      "teamMembers": "team members",
+      "total_clients": "Total Clients",
+      "total_services": "Total Services",
+      "todays_services": "Today's Services",
+      "yesterdays_services": "Yesterday's Services",
+      "todays_cost": "Today's total service cost",
+      "yesterdays_cost": "Yesterday's total service cost"
     },
     "table": {
       "title": "Awesome table",
@@ -291,10 +307,20 @@
     "persian": "Persian"
   },
   "menu": {
+    "internalUsers": "User Accounts",
     "auth": "Auth",
     "rating": "Rating",
+    "settings": "Settings",
+    "contactType": "Contact Type",
     "buttons": "Buttons",
     "charts": "Charts",
+    "clients": "Manage Clients",
+    "clientAdd": "Add new client",
+    "clientList": "Clients",
+    "todayServices": "Today's Services",
+    "onProcess": "On Process Services",
+    "pending": "Pending Services",
+    "home": "Home",
     "colorPickers": "Color Pickers",
     "collapses": "Collapses",
     "timelines": "Timelines",

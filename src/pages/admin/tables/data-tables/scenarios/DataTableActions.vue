@@ -1,6 +1,6 @@
 <template>
   <va-card :title="t('tables.labelsActions')">
-    <va-data-table :fields="fields" :data="users" no-pagination>
+    <va-data-table :fields="fields" :items="users" :columns="fields" :per-page="10" :current-page="1">
       <template #marker="props">
         <va-icon name="fa fa-circle" :color="props.rowData.color" size="8px" />
       </template>
@@ -18,51 +18,42 @@
   </va-card>
 </template>
 
-<script>
+<script setup lang="ts">
+  import { useI18n } from 'vue-i18n'
   import users from '../data/users.json'
+  import { ref } from 'vue'
 
-  export default {
-    data() {
-      return {
-        users: users.slice(0, 6),
-      }
+  const { t } = useI18n()
+
+  const fields = ref([
+    {
+      key: 'marker',
+      width: '30px',
+      dataClass: 'text-center',
     },
-    computed: {
-      fields() {
-        return [
-          {
-            name: '__slot:marker',
-            width: '30px',
-            dataClass: 'text-center',
-          },
-          {
-            name: 'fullName',
-            title: this.t('tables.headings.name'),
-          },
-          {
-            name: 'email',
-            title: this.t('tables.headings.email'),
-          },
-          {
-            name: 'country',
-            title: this.t('tables.headings.country'),
-          },
-          {
-            name: '__slot:actions',
-            dataClass: 'va-text-right',
-          },
-        ]
-      },
+    {
+      key: 'fullName',
+      title: t('tables.headings.name'),
     },
-    methods: {
-      edit(user) {
-        alert('Edit User: ' + JSON.stringify(user))
-      },
-      remove(user) {
-        const idx = this.users.findIndex((u) => u.id === user.id)
-        this.users.splice(idx, 1)
-      },
+    {
+      key: 'email',
+      title: t('tables.headings.email'),
     },
+    {
+      key: 'country',
+      title: t('tables.headings.country'),
+    },
+    {
+      key: '__slot:actions',
+      dataClass: 'va-text-right',
+    },
+  ])
+  const edit = (user: any) => {
+    alert('Edit User: ' + JSON.stringify(user))
+  }
+  const remove = (user: any) => {
+    const idx = users.findIndex((u) => u.id === user.id)
+    users.splice(idx, 1)
   }
 </script>
 

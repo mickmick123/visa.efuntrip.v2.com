@@ -18,12 +18,12 @@
       :error-messages="passwordErrors"
     />
 
-    <div class="auth-layout__options flex items-center justify-between">
+    <!-- <div class="auth-layout__options flex items-center justify-between">
       <va-checkbox v-model="keepLoggedIn" class="mb-0" :label="t('auth.keep_logged_in')" />
       <router-link class="ml-1 va-link" :to="{ name: 'recover-password' }">{{
         t('auth.recover_password')
       }}</router-link>
-    </div>
+    </div> -->
 
     <div class="flex justify-center mt-4">
       <va-button class="my-0" @click="onsubmit">{{ t('auth.login') }}</va-button>
@@ -33,8 +33,9 @@
 
 <script setup lang="ts">
   import { computed, ref } from 'vue'
-  import { useRouter } from 'vue-router'
+  // import { useRouter } from 'vue-router'
   import { useI18n } from 'vue-i18n'
+  import { useAuthStore } from '../../../stores/authStore'
   const { t } = useI18n()
 
   const email = ref('')
@@ -42,8 +43,8 @@
   const keepLoggedIn = ref(false)
   const emailErrors = ref<string[]>([])
   const passwordErrors = ref<string[]>([])
-  const router = useRouter()
-
+  // const router = useRouter()
+  const authStore = useAuthStore()
   const formReady = computed(() => !emailErrors.value.length && !passwordErrors.value.length)
 
   function onsubmit() {
@@ -52,6 +53,10 @@
     emailErrors.value = email.value ? [] : ['Email is required']
     passwordErrors.value = password.value ? [] : ['Password is required']
 
-    router.push({ name: 'dashboard' })
+    return authStore.login(email.value, password.value).catch((error) => {
+      console.log(error)
+    })
+
+    // router.push({ name: 'dashboard' })
   }
 </script>

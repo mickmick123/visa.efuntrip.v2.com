@@ -82,7 +82,23 @@
 <style lang="scss">
   $mobileBreakPointPX: 640px;
   $tabletBreakPointPX: 768px;
-
+  .inner-select .va-input-wrapper__field {
+    border: none !important;
+  }
+  .inner-select .va-input-wrapper__size-keeper {
+    min-width: 100% !important;
+    max-width: unset;
+    width: 8rem !important;
+  }
+  .inner-select .va-input__content__input {
+    height: 100%;
+  }
+  // .va-input__content__input, .va-date-input__input, .va-time-input__input {
+  //   height: 30px;
+  // }
+  // .va-input-wrapper__text {
+  //   height: 30px !important;
+  // }
   .app-layout {
     height: 100vh;
     display: flex;

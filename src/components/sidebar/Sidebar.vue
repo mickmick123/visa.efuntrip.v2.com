@@ -6,10 +6,32 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { ref, watch } from 'vue'
   import NavigationRoutes from './NavigationRoutes'
   import MenuAccordion from './menu/MenuAccordion.vue'
   import MenuMinimized from './menu/MenuMinimized.vue'
+  import { useUsersStore } from '../../stores/userStore'
+  import { storeToRefs } from 'pinia'
+  import { object } from '@amcharts/amcharts5'
+
+  const CurrentUser = useUsersStore()
+  const { user } = storeToRefs(CurrentUser)
+
+  const items = ref(NavigationRoutes.routes)
+
+  watch(user, async (newValue: any) => {
+    try {
+      let isAdmin = false
+      newValue.roles.map((obj: any) => {
+        if (obj.name === 'master') {
+          isAdmin = true
+        }
+      })
+      if (!isAdmin) {
+        items.value = items.value.filter((r: any) => !r.name || r.name !== 'settings')
+      }
+    } catch (error) {}
+  })
 
   withDefaults(
     defineProps<{
@@ -27,8 +49,6 @@
       minimizedWidth: undefined,
     },
   )
-
-  const items = ref(NavigationRoutes.routes)
 </script>
 
 <style lang="scss">

@@ -1,10 +1,20 @@
 <template>
-  <div class="pt-6 grid grid-cols-12 gap-6">
+  <div class="pt-6 pb-6 grid grid-cols-4 gap-6">
     <div class="col-span-12 lg:col-span-6 flex flex-wrap">
-      <div class="w-full pb-6 grid grid-cols-12 gap-6">
-        <va-card v-for="(info, idx) in infoTiles" :key="idx" class="col-span-12 sm:col-span-4 mb-8" :color="info.color">
+      <div class="w-full pb-6 grid grid-cols-4 gap-6">
+        <va-card v-for="(info, idx) in infoTiles" :key="idx" class="max-sm:col-span-4 mb-8" :color="info.color">
           <va-card-content>
-            <h2 class="va-h2 m-0 text-white">{{ info.value }}</h2>
+            <h2 class="va-h2 m-0 text-white">
+              {{
+                info.text === 'total_clients'
+                  ? counter.total_clients
+                  : info.text === 'total_services'
+                  ? counter.total_services
+                  : info.text === 'todays_services'
+                  ? counter.total_services_today
+                  : counter.total_services_yesterday
+              }}
+            </h2>
             <p class="text-white">{{ t('dashboard.info.' + info.text) }}</p>
           </va-card-content>
         </va-card>
@@ -13,11 +23,21 @@
       <div class="w-full grid grid-cols-12 gap-6">
         <va-card class="col-span-12 sm:col-span-6">
           <va-card-content class="h-full flex flex-col justify-center">
-            <h2 class="va-h2 m-0" :style="{ color: colors.primary }">291</h2>
-            <p class="no-wrap">{{ t('dashboard.info.completedPullRequests') }}</p>
+            <h2 class="va-h2 m-0" :style="{ color: colors.primary }">
+              {{ formatPrice(counter.total_services_cost_today) }}
+            </h2>
+            <p class="no-wrap">{{ t('dashboard.info.todays_cost') }}</p>
           </va-card-content>
         </va-card>
         <va-card class="col-span-12 sm:col-span-6">
+          <va-card-content class="h-full flex flex-col justify-center">
+            <h2 class="va-h2 m-0" :style="{ color: colors.secondary }">
+              {{ formatPrice(counter.total_services_cost_yesterday) }}
+            </h2>
+            <p class="no-wrap">{{ t('dashboard.info.yesterdays_cost') }}</p>
+          </va-card-content>
+        </va-card>
+        <!-- <va-card class="col-span-12 sm:col-span-6">
           <va-card-content class="grid grid-cols-12 row-separated">
             <div class="col-span-4 p-4 flex flex-col">
               <h2 class="va-h2 m-0 va-text-center" :style="{ color: colors.primary }">3</h2>
@@ -32,69 +52,48 @@
               <p class="va-text-center">{{ t('dashboard.info.units') }}</p>
             </div>
           </va-card-content>
-        </va-card>
+        </va-card> -->
       </div>
     </div>
-
-    <div class="flex col-span-12 sm:col-span-6 lg:col-span-3">
-      <va-card stripe stripe-color="info">
-        <va-card-title>
-          {{ t('dashboard.info.componentRichTheme') }}
-        </va-card-title>
-        <va-card-content>
-          <p class="rich-theme-card-text">
-            Buying the right telescope to take your love of astronomy to the next level is a big next step.
-          </p>
-
-          <div class="mt-4">
-            <va-button color="primary" target="_blank" href="https://github.com/epicmaxco/vuestic-ui">
-              {{ t('dashboard.info.viewLibrary') }}
-            </va-button>
-          </div>
-        </va-card-content>
-      </va-card>
-    </div>
-
-    <va-card class="col-span-12 sm:col-span-6 lg:col-span-3">
-      <va-image :src="images[currentImageIndex]" style="height: 200px" />
-      <va-card-title>
-        <va-button preset="plain" icon-right="fa-arrow-circle-right" @click="showModal">
-          {{ t('dashboard.info.exploreGallery') }}
-        </va-button>
-      </va-card-title>
-    </va-card>
-
-    <va-modal v-model="modal">
-      <va-carousel v-model="currentImageIndex" :items="images" class="gallery-carousel" />
-    </va-modal>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { computed, reactive, ref } from 'vue'
   import { useI18n } from 'vue-i18n'
   import { VaCarousel, VaModal, VaCard, VaCardContent, VaCardTitle, VaButton, VaImage, useColors } from 'vuestic-ui'
+  import { useContentStore } from '../../../stores/contentStore'
+  import { storeToRefs } from 'pinia'
 
   const { t } = useI18n()
   const { colors } = useColors()
+  const Counters: any = useContentStore()
+  const { counter }: any = storeToRefs(Counters)
+
+  const formatPrice = (value: any) => {
+    let val = (value / 1).toFixed(2)
+    return val.replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
+  }
 
   const infoTiles = ref([
     {
       color: 'success',
-      value: '803',
-      text: 'commits',
+      text: 'total_clients',
       icon: '',
     },
     {
       color: 'danger',
-      value: '57',
-      text: 'components',
+      text: 'total_services',
       icon: '',
     },
     {
       color: 'info',
-      value: '5',
-      text: 'teamMembers',
+      text: 'todays_services',
+      icon: '',
+    },
+    {
+      color: 'warning',
+      text: 'yesterdays_services',
       icon: '',
     },
   ])

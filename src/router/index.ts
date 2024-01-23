@@ -6,11 +6,13 @@ import Page404Layout from '../layouts/Page404Layout.vue'
 
 import RouteViewComponent from '../layouts/RouterBypass.vue'
 import UIRoute from '../pages/admin/ui/route'
+import { useAuthStore } from '../stores/authStore'
+import { useUsersStore } from '../stores/userStore'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/:catchAll(.*)',
-    redirect: { name: 'dashboard' },
+    redirect: { name: 'home' },
   },
   {
     name: 'admin',
@@ -20,7 +22,87 @@ const routes: Array<RouteRecordRaw> = [
       {
         name: 'dashboard',
         path: 'dashboard',
-        component: () => import('../pages/admin/dashboard/Dashboard.vue'),
+        component: RouteViewComponent,
+        children: [
+          {
+            name: 'home',
+            path: 'home',
+            component: () => import('../pages/admin/dashboard/Dashboard.vue'),
+            meta: {
+              wikiLink: 'https://github.com/epicmaxco/vuestic-admin/wiki/Charts',
+            },
+          },
+          {
+            name: 'today',
+            path: 'todays-task',
+            component: () => import('../pages/admin/dashboard/Today.vue'),
+            meta: {
+              wikiLink: 'https://github.com/epicmaxco/vuestic-admin/wiki/Charts',
+            },
+          },
+          {
+            name: 'onProcess',
+            path: 'on-process-task',
+            component: () => import('../pages/admin/dashboard/OnProcess.vue'),
+            meta: {
+              wikiLink: 'https://github.com/epicmaxco/vuestic-admin/wiki/Charts',
+            },
+          },
+          {
+            name: 'pending',
+            path: 'pending-task',
+            component: () => import('../pages/admin/dashboard/Pending.vue'),
+            meta: {
+              wikiLink: 'https://github.com/epicmaxco/vuestic-admin/wiki/Charts',
+            },
+          },
+        ],
+      },
+      {
+        name: 'clients',
+        path: 'clients',
+        component: RouteViewComponent,
+        children: [
+          {
+            name: 'list',
+            path: 'list',
+            component: () => import('../pages/admin/clients/Clients.vue'),
+            meta: {
+              wikiLink: 'https://github.com/epicmaxco/vuestic-admin/wiki/Charts',
+            },
+          },
+          {
+            name: 'add-client',
+            path: 'add',
+            component: () => import('../pages/admin/clients/AddClient.vue'),
+            meta: {
+              wikiLink: 'https://github.com/epicmaxco/vuestic-admin/wiki/Progress-Bars',
+            },
+          },
+        ],
+      },
+      {
+        name: 'settings',
+        path: 'settings',
+        component: RouteViewComponent,
+        children: [
+          {
+            name: 'contact-type',
+            path: 'contact-type',
+            component: () => import('../pages/admin/dashboard/ContactType.vue'),
+            meta: {
+              wikiLink: 'https://github.com/epicmaxco/vuestic-admin/wiki/Charts',
+            },
+          },
+          {
+            name: 'internal-users',
+            path: 'internal-users',
+            component: () => import('../pages/admin/settings/InternalUsers.vue'),
+            meta: {
+              wikiLink: 'https://github.com/epicmaxco/vuestic-admin/wiki/Progress-Bars',
+            },
+          },
+        ],
       },
       {
         name: 'statistics',
@@ -225,6 +307,21 @@ const router = createRouter({
     }
   },
   routes,
+})
+
+router.beforeEach(async (to) => {
+  // redirect to login page if not logged in and trying to access a restricted page
+  const publicPages = ['/auth/login']
+  const authRequired = !publicPages.includes(to.path)
+  const auth: any = useAuthStore()
+  const user: any = useUsersStore()
+
+  if (authRequired && !auth.accessToken) {
+    // auth.returnUrl = to.fullPath;
+    return '/auth/login'
+  } else {
+    user.getCurrentUser()
+  }
 })
 
 export default router
