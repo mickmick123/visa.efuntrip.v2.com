@@ -42,7 +42,6 @@ export default {
       meta: {
         icon: 'vuestic-iconset-user',
       },
-      disabled: true,
       children: [
         {
           name: 'list',
