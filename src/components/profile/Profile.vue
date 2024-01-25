@@ -69,7 +69,6 @@ const loadProfile = async () => {
     isLoading.value = true
     const res = await getClientProfile(route.params.id)
     client.value = res.data.client
-    console.log(client.value)
     isLoading.value = false
 }
 loadProfile()

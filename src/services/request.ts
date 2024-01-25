@@ -141,4 +141,96 @@ export const getClientDocuments = async (id: any) => {
   return res
 }
 
+export const getAllDocumentTypes = async () => {
+  const res = await fetchWrapper.post(`${baseUrl}${APIs.GET_ALL_DOCUMENT_TYPE}`, null)
+
+  return res
+}
+
+export const uploadClientDocument = async (params: any) => {
+  const res = await fetchWrapper.post(`${baseUrl}${APIs.UPLOAD_DOCUMENTS_BY_CLIENT}/${params.client_id}`, {
+    client_id: params.client_id,
+    data: [
+      params
+    ]
+  })
+
+  return res
+}
+
+export const getClientRemarks = async (id: any) => {
+  const res = await fetchWrapper.get(`${baseUrl}${APIs.GET_CLIENTS_REMARKS}/${id}`, null)
+
+  return res
+}
+
+export const getTransactionHistory = async (id: any) => {
+  const res = await fetchWrapper.get(`${baseUrl}${APIs.GET_TRANSACTION_HISTORY}/${id}/0`, null)
+
+  return res
+}
+
+export const addClientFund = async (params: any) => {
+  const res = await fetchWrapper.post(`${baseUrl}${APIs.ADD_CLIENT_FUND}`, {
+    ...params
+  })
+
+  return res
+}
+
+export const getClientBySearch = async (search: any) => {
+  const res = await fetchWrapper.get(`${baseUrl}${APIs.CLIENTS_SEARCH}?search=${search}&branch_id=1&is_member_search=false`, null)
+
+  return res
+}
+
+export const getGroupBySearch = async (search: any) => {
+  const res = await fetchWrapper.get(`${baseUrl}${APIs.GROUPS_SEARCH}?search=${search}`, null)
+
+  return res
+}
+
+export const getClientPackages = async (id: any) => {
+  const res = await fetchWrapper.get(`${baseUrl}${APIs.GET_CLIENTS_PACKAGES}/${id}`, null)
+
+  return res
+}
+
+export const addClientPackage = async (client_id: any) => {
+  const res = await fetchWrapper.post(`${baseUrl}${APIs.ADD_CLIENT_PACKAGE}`, {
+    client_id: client_id
+  })
+
+  return res
+}
+
+export const getPackageServices = async (client_id: any, package_number: any) => {
+  const res = await fetchWrapper.get(`${baseUrl}${APIs.GET_CLIENTS_SERVICES}/${client_id}/${package_number}`, null)
+
+  return res
+}
+
+export const getServices = async () => {
+  const res = await fetchWrapper.get(`${baseUrl}${APIs.GET_SERVICES}`, null)
+
+  return res
+}
+
+export const addClientService = async (params: any) => {
+  const res = await fetchWrapper.post(`${baseUrl}${APIs.ADD_CLIENT_SERVICE}`, {
+    ...params
+  })
+
+  return res
+}
+
+export const payClientService = async (params: any) => {
+  const res = await fetchWrapper.post(`${baseUrl}${APIs.ADD_CLIENT_PAYMENT}`, {
+    ...params
+  })
+
+  return res
+}
+
+
 

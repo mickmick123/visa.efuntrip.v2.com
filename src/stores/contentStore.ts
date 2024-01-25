@@ -20,6 +20,7 @@ export const useContentStore = defineStore({
     groupList: {},
     contactTypeList: {},
     internalUsers: {},
+    clientServices: {}
   }),
   actions: {
     async getNumbers() {
@@ -197,6 +198,16 @@ export const useContentStore = defineStore({
             newUser.employee = isEmployee
             return newUser
           })
+        })
+        .catch((error: any) => {
+          console.log(error)
+        })
+    },
+    async getClientServices(client_id: any, package_number: any) {
+      this.clientServices = {}
+      fetchWrapper.get(`${baseUrl}${APIs.GET_CLIENTS_SERVICES}/${client_id}/${package_number}`, null)
+        .then((res) => {
+          this.clientServices = res.data
         })
         .catch((error: any) => {
           console.log(error)
