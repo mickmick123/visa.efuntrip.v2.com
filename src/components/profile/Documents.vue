@@ -59,7 +59,7 @@
           <VaCard v-for="(doc, index) in documents" :key="index" class="max-w-[25%] min-w-[25%] m-5">
             <VaImage
               :src="`${baseUrl}${doc.file_path}`"
-              fallback-src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.m.wikipedia.org%2Fwiki%2FFile%3ANo_Image_Available.jpg&psig=AOvVaw3-QrI7kOlw4E9Vv01rDYov&ust=1706237934262000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCNCc6-HF94MDFQAAAAAdAAAAABAE"
+              fallback-src="https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg"
               class="h-52"
             />
             <VaCardTitle>{{ doc.name }}</VaCardTitle>
