@@ -27,7 +27,7 @@
       @filtered="filteredCount = $event.items.length"
     >
       <template #cell(created_at)="{ value }">{{ moment(value).format('L') }}</template>
-      <!-- <template #item.full_name="{ item }">{{ item.first_name }} {{ item.last_name }}</template> -->
+      <template #cell(client)="{ rowIndex }">{{ `${pendingPageServices[rowIndex].client.first_name} ${pendingPageServices[rowIndex].client.last_name}` }}</template>
       <template #cell(actions)="{ rowIndex }">
         <VaButton size="large" preset="plain" icon="output" @click="gotoProfile(rowIndex)" />
       </template>
@@ -115,8 +115,8 @@
       label: 'ID',
     },
     {
-      key: 'full_name',
-      label: 'Client',
+      key: 'client',
+      label: 'Name',
     },
     {
       key: 'tracking',
