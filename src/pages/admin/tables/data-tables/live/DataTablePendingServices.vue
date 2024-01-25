@@ -1,9 +1,9 @@
 <template>
   <va-card title="Pending Services" class="mb-8">
     <va-data-table
+      v-if="pendingPageServices.constructor === Array"
       sticky-header
       class="custom-table va-table--striped"
-      v-if="pendingPageServices.constructor === Array"
       :fields="fields"
       :items="pendingPageServices"
       :columns="fields"
@@ -15,7 +15,7 @@
       </template>
     </va-data-table>
     <va-card title="filter" class="bg-white p-5 w-[100%]">
-      <VaPagination visible-pages="10" v-model="currentPage" :pages="pages" />
+      <VaPagination v-model="currentPage" visible-pages="10" :pages="pages" />
     </va-card>
   </va-card>
 </template>

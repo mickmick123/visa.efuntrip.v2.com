@@ -1,9 +1,9 @@
 <template>
   <va-card title="On Process Services" class="mb-8">
     <VaDataTable
+      v-if="onProcessPageServices.constructor === Array"
       sticky-header
       class="va-table--striped custom-table"
-      v-if="onProcessPageServices.constructor === Array"
       :fields="fields"
       :items="onProcessPageServices"
       :columns="fields"
@@ -15,7 +15,7 @@
       </template>
     </VaDataTable>
     <va-card title="filter" class="bg-white p-5 w-[100%]">
-      <VaPagination visible-pages="10" v-model="currentPage" :pages="pages" />
+      <VaPagination v-model="currentPage" visible-pages="10" :pages="pages" />
     </va-card>
   </va-card>
 </template>

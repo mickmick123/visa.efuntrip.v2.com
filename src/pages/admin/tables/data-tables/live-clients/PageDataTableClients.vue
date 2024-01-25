@@ -17,9 +17,9 @@
   <div class="mb-5"></div>
   <va-card title="On Process Services" class="mb-8">
     <VaDataTable
+      v-if="listClientsPaginate.constructor === Array"
       sticky-header
       class="va-table--striped custom-table"
-      v-if="listClientsPaginate.constructor === Array"
       :fields="fields"
       :items="listClientsPaginate"
       :columns="fields"
@@ -36,7 +36,7 @@
             {{ value }}
           </VaChip>
           <template #body>
-            <div v-for="rem in listClientsPaginate[rowIndex].remarks">
+            <div v-for="(rem, index) in listClientsPaginate[rowIndex].remarks" :key="index">
               <p class="font-bold text-blue-500 text-center">{{ rem.remark }}</p>
               <p class="text-center">written by</p>
               <p class="font-bold text-center">{{ rem.created_by }}</p>
@@ -61,9 +61,9 @@
         </VaPopover>
       </template>
     </VaDataTable>
-    <VaDataTable loading :items="[{ 'Manage Clients': 'Fetching Data' }]" v-else> </VaDataTable>
+    <VaDataTable v-else loading :items="[{ 'Manage Clients': 'Fetching Data' }]"> </VaDataTable>
     <va-card title="filter" class="bg-white p-5 w-[100%]">
-      <VaPagination visible-pages="10" v-model="currentPage" :pages="pages" />
+      <VaPagination v-model="currentPage" visible-pages="10" :pages="pages" />
     </va-card>
   </va-card>
   <VaModal
@@ -170,8 +170,8 @@
     return source?.toString?.() === filter.value
   }
 
-  const updateFilter = (filter: any) => {
-    filter = filter
+  const updateFilter = (nfilter: any) => {
+    filter = nfilter
   }
 
   const debouncedUpdateFilter = debounce(function (filter) {
@@ -179,8 +179,8 @@
   }, 600)
 
   const gotoProfile = (row: any) => {
-    const rpath = router.resolve({path:`/admin/clients/profile/${listClientsPaginate.value[row].id}`})
-    window.open(rpath.href, '_blank');
+    const rpath = router.resolve({ path: `/admin/clients/profile/${listClientsPaginate.value[row].id}` })
+    window.open(rpath.href, '_blank')
   }
 
   const dateInput = ref(moment(new Date()).format('YYYY-MM-DD'))

@@ -30,7 +30,9 @@
       if (!isAdmin) {
         items.value = items.value.filter((r: any) => !r.name || r.name !== 'settings')
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
   })
 
   withDefaults(

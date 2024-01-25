@@ -6,11 +6,12 @@ import router from '../router'
 import { useToast } from 'vuestic-ui'
 
 const baseUrl = `${import.meta.env.VITE_APP_API_BASE}`
+const sto: any = localStorage.getItem('accessToken') ? localStorage.getItem('accessToken') : ''
 export const useAuthStore = defineStore({
   id: 'auth',
   state: () => ({
     // initialize state from local storage to enable user to stay logged in
-    accessToken: localStorage.getItem('accessToken') ? JSON.parse(localStorage.getItem('accessToken')) : '',
+    accessToken: localStorage.getItem('accessToken') ? JSON.parse(sto) : '',
     returnUrl: null,
   }),
   actions: {

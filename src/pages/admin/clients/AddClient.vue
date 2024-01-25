@@ -7,8 +7,8 @@
           <div class="grid grid-cols-12 gap-6">
             <div class="flex md:col-span-4 sm:col-span-6 col-span-12">
               <va-input
-                :rules="[(v: any) => Boolean(v)]"
                 v-model="first_name"
+                :rules="[(v: any) => Boolean(v)]"
                 placeholder="Enter your first name"
                 label="*First name"
               />
@@ -18,8 +18,8 @@
             </div>
             <div class="flex md:col-span-4 sm:col-span-6 col-span-12">
               <va-input
-                :rules="[(v: any) => Boolean(v)]"
                 v-model="last_name"
+                :rules="[(v: any) => Boolean(v)]"
                 placeholder="Enter your last name"
                 label="*Last name"
               />
@@ -28,15 +28,15 @@
               <va-date-input
                 :rules="[(v: any) => Boolean(v)]"
                 :format="formatFn"
-                @click:day="(d: any) => dtSelected('birth_date', d)"
                 label="*Date of birth"
                 placeholder="YYYY-MM-DD"
+                @click:day="(d: any) => dtSelected('birth_date', d)"
               />
             </div>
             <div class="flex md:col-span-4 sm:col-span-6 col-span-12">
               <va-select
-                searchable
                 v-model="nationalities"
+                searchable
                 placeholder="Please select"
                 label="Nationalities"
                 :options="countriesList"
@@ -45,8 +45,8 @@
             </div>
             <div class="flex md:col-span-4 sm:col-span-6 col-span-12">
               <va-select
-                searchable
                 v-model="birth_country"
+                searchable
                 placeholder="Please select"
                 label="Birth country"
                 :options="countriesList"
@@ -77,9 +77,9 @@
             <div class="flex md:col-span-4 sm:col-span-6 col-span-12">
               <va-date-input
                 :format="formatFn"
-                @click:day="(d: any) => dtSelected('passport_expiration_date', d)"
                 placeholder="YYYY-MM-DD"
                 label="Passport Valid Until"
+                @click:day="(d: any) => dtSelected('passport_expiration_date', d)"
               />
             </div>
           </div>
@@ -95,52 +95,52 @@
             <va-date-input
               v-if="visaType === '9A'"
               :format="formatFn"
-              @click:day="(d: any) => dtSelected('arrival_date', d)"
               label="Arrival date"
               placeholder="YYYY-MM-DD"
+              @click:day="(d: any) => dtSelected('arrival_date', d)"
             />
             <va-date-input
               v-if="(visaType === '9A' && !autoSet) || visaType === 'CWV'"
               :format="formatFn"
-              @click:day="(d: any) => dtSelected('first_expiration_date', d)"
               label="First Expiration date"
               placeholder="YYYY-MM-DD"
+              @click:day="(d: any) => dtSelected('first_expiration_date', d)"
             />
             <va-date-input
               v-if="visaType === '9A' && autoSet"
-              :format="formatFn"
               v-model="first_expiration_date"
-              @click:day="(d: any) => dtSelected('first_expiration_date', d)"
+              :format="formatFn"
               label="First Expiration date"
               placeholder="YYYY-MM-DD"
+              @click:day="(d: any) => dtSelected('first_expiration_date', d)"
             />
             <va-date-input
               v-if="visaType === '9A'"
               :format="formatFn"
-              @click:day="(d: any) => dtSelected('extended_expiration_date', d)"
               label="Extended Expiration date"
               placeholder="YYYY-MM-DD"
+              @click:day="(d: any) => dtSelected('extended_expiration_date', d)"
             />
             <va-date-input
               v-if="visaType === '9G' || visaType === 'TRV'"
               :format="formatFn"
-              @click:day="(d: any) => dtSelected('expiration_date', d)"
               label="Visa Expiration Date"
               placeholder="YYYY-MM-DD"
+              @click:day="(d: any) => dtSelected('expiration_date', d)"
             />
             <va-date-input
               v-if="visaType === '9G' || visaType === 'TRV'"
               :format="formatFn"
-              @click:day="(d: any) => dtSelected('icard_issue_date', d)"
               label="I-Card date issued"
               placeholder="YYYY-MM-DD"
+              @click:day="(d: any) => dtSelected('icard_issue_date', d)"
             />
             <va-date-input
               v-if="visaType === '9G' || visaType === 'TRV'"
               :format="formatFn"
-              @click:day="(d: any) => dtSelected('icard_expiration_date', d)"
               label="I-Card Expiration date"
               placeholder="YYYY-MM-DD"
+              @click:day="(d: any) => dtSelected('icard_expiration_date', d)"
             />
           </div>
         </form>
@@ -159,8 +159,8 @@
             </div>
             <div
               v-for="(items, index) in contact_alternate"
-              class="md:col-span-12 sm:col-span-12 col-span-12 grid-cols-12 gap-6 grid"
               :key="index"
+              class="md:col-span-12 sm:col-span-12 col-span-12 grid-cols-12 gap-6 grid"
             >
               <div class="flex md:col-span-6 sm:col-span-6 col-span-12">
                 <VaInput
@@ -182,7 +182,7 @@
                     />
                   </template>
 
-                  <template #append v-if="index === contact_alternate.length - 1 && index !== 0">
+                  <template v-if="index === contact_alternate.length - 1 && index !== 0" #append>
                     <VaButton
                       icon="add"
                       color="primary"
@@ -198,7 +198,7 @@
                       @click="removeFromContact(index)"
                     />
                   </template>
-                  <template #append v-else>
+                  <template v-else #append>
                     <VaButton
                       v-if="index === 0 && contact_alternate.length - 1 === 0"
                       icon="add"
@@ -234,15 +234,15 @@
           <div class="grid grid-cols-12 gap-6">
             <div class="flex md:col-span-6 col-span-12">
               <va-select
-                multiple
                 v-model="branches"
+                multiple
                 label="*Branches"
                 placeholder="Please select"
                 :options="branchList"
               />
             </div>
             <div class="flex md:col-span-6 col-span-12">
-              <va-select multiple v-model="groups" label="Group" placeholder="Please select" :options="groupList" />
+              <va-select v-model="groups" multiple label="Group" placeholder="Please select" :options="groupList" />
             </div>
           </div>
         </form>
@@ -252,7 +252,7 @@
       <va-card-content>
         <div class="grid grid-cols-6 gap-4">
           <div class="col-end-10 col-span-2">
-            <VaButton @click="() => saveClient()" size="medium" class="rounded-sm"> Save Client </VaButton>
+            <VaButton size="medium" class="rounded-sm" @click="() => saveClient()"> Save Client </VaButton>
           </div>
         </div>
       </va-card-content>

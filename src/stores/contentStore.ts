@@ -20,7 +20,7 @@ export const useContentStore = defineStore({
     groupList: {},
     contactTypeList: {},
     internalUsers: {},
-    clientServices: {}
+    clientServices: {},
   }),
   actions: {
     async getNumbers() {
@@ -95,7 +95,7 @@ export const useContentStore = defineStore({
           console.log(error)
         })
     },
-    async getTodayServices(per_page: Number, page: Number, date: any, search: any) {
+    async getTodayServices(per_page: number, page: number, date: any, search: any) {
       this.todayServices = {}
       fetchWrapper
         .get(
@@ -110,7 +110,7 @@ export const useContentStore = defineStore({
         })
     },
 
-    async getClients(per_page: Number, page: Number, branch: any, search: any) {
+    async getClients(per_page: number, page: number, branch: any, search: any) {
       this.listClientsPaginate = {}
       fetchWrapper
         .get(
@@ -125,7 +125,7 @@ export const useContentStore = defineStore({
         })
     },
 
-    async getOnProcessServices(per_page: Number, page: Number, search: any) {
+    async getOnProcessServices(per_page: number, page: number, search: any) {
       this.onProcessPageServices = {}
       fetchWrapper
         .get(
@@ -140,7 +140,7 @@ export const useContentStore = defineStore({
         })
     },
 
-    async getPendingServices(per_page: Number, page: Number, search: any) {
+    async getPendingServices(per_page: number, page: number, search: any) {
       this.pendingPageServices = {}
       fetchWrapper
         .get(
@@ -184,8 +184,8 @@ export const useContentStore = defineStore({
         .then((res) => {
           this.internalUsers = res.data.map((u: any) => {
             const newUser = u
-            var isMaster = false
-            var isEmployee = false
+            let isMaster = false
+            let isEmployee = false
             Object.keys(u.roles).forEach(function (key) {
               if (u.roles[key].name == 'master') {
                 isMaster = true
@@ -205,7 +205,8 @@ export const useContentStore = defineStore({
     },
     async getClientServices(client_id: any, package_number: any) {
       this.clientServices = {}
-      fetchWrapper.get(`${baseUrl}${APIs.GET_CLIENTS_SERVICES}/${client_id}/${package_number}`, null)
+      fetchWrapper
+        .get(`${baseUrl}${APIs.GET_CLIENTS_SERVICES}/${client_id}/${package_number}`, null)
         .then((res) => {
           this.clientServices = res.data
         })

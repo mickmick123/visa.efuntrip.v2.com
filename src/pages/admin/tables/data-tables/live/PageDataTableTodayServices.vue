@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-row justify-between">
     <va-card title="filter" class="bg-white p-5 w-[40%]">
-      <VaInput innerLabel v-model="input" placeholder="Filter..." class="w-full" />
+      <VaInput v-model="input" inner-label placeholder="Filter..." class="w-full" />
     </va-card>
     <va-card title="filter" class="flex justify-center bg-white p-5 w-[25%]">
-      <va-date-input innerLabel v-model="dateInput" label="Search date" />
+      <va-date-input v-model="dateInput" inner-label label="Search date" />
     </va-card>
     <va-card title="filter" class="flex justify-center bg-white p-5 w-[25%]">
       <va-button-toggle
@@ -21,9 +21,9 @@
   <div class="mb-5"></div>
   <va-card title="On Process Services" class="mb-8">
     <VaDataTable
+      v-if="todayServices.constructor === Array"
       sticky-header
       class="va-table--striped custom-table"
-      v-if="todayServices.constructor === Array"
       :fields="fields"
       :items="todayServices"
       :columns="fields"
@@ -40,7 +40,7 @@
       </template>
     </VaDataTable>
     <va-card title="filter" class="bg-white p-5 w-[100%]">
-      <VaPagination visible-pages="10" v-model="currentPage" :pages="pages" />
+      <VaPagination v-model="currentPage" visible-pages="10" :pages="pages" />
     </va-card>
   </va-card>
 </template>
@@ -91,8 +91,8 @@
     return source?.toString?.() === filter.value
   }
 
-  const updateFilter = (filter: any) => {
-    filter = filter
+  const updateFilter = (nfilter: any) => {
+    filter = nfilter
   }
 
   const debouncedUpdateFilter = debounce(function (filter) {

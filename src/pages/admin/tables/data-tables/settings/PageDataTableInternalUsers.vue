@@ -1,9 +1,9 @@
 <template>
   <va-card title="Internal Users" class="mb-8">
     <VaDataTable
+      v-if="internalUsers.constructor === Array"
       sticky-header
       class="custom-table va-table--striped"
-      v-if="internalUsers.constructor === Array"
       :fields="fields"
       :items="internalUsers"
       :columns="fields"
@@ -12,16 +12,16 @@
     >
       <template #cell(employee)="{ rowIndex }">
         <VaSwitch
-          @update:modelValue="updateUserStatus(rowIndex)"
-          color="success"
           v-model="internalUsers[rowIndex].employee"
+          color="success"
+          @update:modelValue="updateUserStatus(rowIndex)"
         />
       </template>
       <template #cell(admin)="{ rowIndex }">
         <VaSwitch
-          @update:modelValue="updateUserStatus(rowIndex)"
-          color="danger"
           v-model="internalUsers[rowIndex].admin"
+          color="danger"
+          @update:modelValue="updateUserStatus(rowIndex)"
         />
       </template>
       <template #cell(actions)="{ rowIndex }">
@@ -31,7 +31,7 @@
       </template>
     </VaDataTable>
     <va-card title="filter" class="bg-white p-5 w-[100%]">
-      <VaPagination visible-pages="10" v-model="currentPage" :pages="pages" />
+      <VaPagination v-model="currentPage" visible-pages="10" :pages="pages" />
     </va-card>
     <VaModal
       v-model="showModal"

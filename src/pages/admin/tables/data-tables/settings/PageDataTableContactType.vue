@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-row justify-between">
     <va-card title="filter" class="bg-white p-5 w-[40%]">
-      <VaInput innerLabel v-model="input" placeholder="Contact type" class="w-full" />
+      <VaInput v-model="input" inner-label placeholder="Contact type" class="w-full" />
     </va-card>
     <va-card title="filter" class="flex justify-center bg-white p-5 w-[25%]">
       <VaButton class="rounded-sm" @click="() => addContact()"> Save </VaButton>
@@ -11,9 +11,9 @@
   <div class="mb-5"></div>
   <va-card title="Contact Types" class="mb-8">
     <VaDataTable
+      v-if="contactTypeList.constructor === Array"
       sticky-header
       class="custom-table va-table--striped"
-      v-if="contactTypeList.constructor === Array"
       :fields="fields"
       :items="contactTypeList"
       :columns="fields"
@@ -25,7 +25,7 @@
       </template>
     </VaDataTable>
     <va-card title="filter" class="bg-white p-5 w-[100%]">
-      <VaPagination visible-pages="10" v-model="currentPage" :pages="pages" />
+      <VaPagination v-model="currentPage" visible-pages="10" :pages="pages" />
     </va-card>
   </va-card>
 </template>

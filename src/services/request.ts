@@ -150,9 +150,7 @@ export const getAllDocumentTypes = async () => {
 export const uploadClientDocument = async (params: any) => {
   const res = await fetchWrapper.post(`${baseUrl}${APIs.UPLOAD_DOCUMENTS_BY_CLIENT}/${params.client_id}`, {
     client_id: params.client_id,
-    data: [
-      params
-    ]
+    data: [params],
   })
 
   return res
@@ -172,14 +170,17 @@ export const getTransactionHistory = async (id: any) => {
 
 export const addClientFund = async (params: any) => {
   const res = await fetchWrapper.post(`${baseUrl}${APIs.ADD_CLIENT_FUND}`, {
-    ...params
+    ...params,
   })
 
   return res
 }
 
 export const getClientBySearch = async (search: any) => {
-  const res = await fetchWrapper.get(`${baseUrl}${APIs.CLIENTS_SEARCH}?search=${search}&branch_id=1&is_member_search=false`, null)
+  const res = await fetchWrapper.get(
+    `${baseUrl}${APIs.CLIENTS_SEARCH}?search=${search}&branch_id=1&is_member_search=false`,
+    null,
+  )
 
   return res
 }
@@ -198,7 +199,7 @@ export const getClientPackages = async (id: any) => {
 
 export const addClientPackage = async (client_id: any) => {
   const res = await fetchWrapper.post(`${baseUrl}${APIs.ADD_CLIENT_PACKAGE}`, {
-    client_id: client_id
+    client_id: client_id,
   })
 
   return res
@@ -218,7 +219,7 @@ export const getServices = async () => {
 
 export const addClientService = async (params: any) => {
   const res = await fetchWrapper.post(`${baseUrl}${APIs.ADD_CLIENT_SERVICE}`, {
-    ...params
+    ...params,
   })
 
   return res
@@ -226,11 +227,8 @@ export const addClientService = async (params: any) => {
 
 export const payClientService = async (params: any) => {
   const res = await fetchWrapper.post(`${baseUrl}${APIs.ADD_CLIENT_PAYMENT}`, {
-    ...params
+    ...params,
   })
 
   return res
 }
-
-
-

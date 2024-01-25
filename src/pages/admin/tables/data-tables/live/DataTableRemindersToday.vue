@@ -1,8 +1,8 @@
 <template>
   <va-card title="On Process Services" class="mb-8">
     <VaDataTable
-      class="va-table--striped"
       v-if="todayTasks.constructor === Array"
+      class="va-table--striped"
       :fields="fields"
       :items="todayTasks"
       :columns="fields"
@@ -13,7 +13,7 @@
         <tr>
           <td colspan="6">
             <div class="flex justify-end mb-4 mt-2 mr-5">
-              <VaPagination visible-pages="10" v-model="currentPage" :pages="pages" />
+              <VaPagination v-model="currentPage" visible-pages="10" :pages="pages" />
             </div>
           </td>
         </tr>

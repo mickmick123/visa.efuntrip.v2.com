@@ -93,7 +93,7 @@
   .inner-select .va-input__content__input {
     height: 100%;
   }
-  .my-tab .va-tabs__content{
+  .my-tab .va-tabs__content {
     width: 100% !important;
   }
   // .va-input__content__input, .va-date-input__input, .va-time-input__input {

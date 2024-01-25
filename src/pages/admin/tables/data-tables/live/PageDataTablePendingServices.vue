@@ -15,9 +15,9 @@
   <div class="mb-5"></div>
   <va-card title="On Process Services" class="mb-8">
     <VaDataTable
+      v-if="pendingPageServices.constructor === Array"
       sticky-header
       class="va-table--striped custom-table"
-      v-if="pendingPageServices.constructor === Array"
       :fields="fields"
       :items="pendingPageServices"
       :columns="fields"
@@ -33,7 +33,7 @@
       </template>
     </VaDataTable>
     <va-card title="filter" class="bg-white p-5 w-[100%]">
-      <VaPagination visible-pages="10" v-model="currentPage" :pages="pages" />
+      <VaPagination v-model="currentPage" visible-pages="10" :pages="pages" />
     </va-card>
   </va-card>
 </template>
@@ -52,7 +52,6 @@
     { label: 'Yesterday', value: 'yesterday' },
   ])
   const model = ref('today')
-  import { log } from 'console'
 
   const { t } = useI18n()
   const per_page = ref(10)
@@ -84,8 +83,8 @@
     return source?.toString?.() === filter.value
   }
 
-  const updateFilter = (filter: any) => {
-    filter = filter
+  const updateFilter = (nfilter: any) => {
+    filter = nfilter
   }
 
   const debouncedUpdateFilter = debounce(function (filter) {
