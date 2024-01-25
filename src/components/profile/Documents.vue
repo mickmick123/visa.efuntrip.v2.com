@@ -57,7 +57,11 @@
       <VaCardContent>
         <div class="flex p-10 w-100% flex-wrap ustify-evenly items-center">
           <VaCard v-for="(doc, index) in documents" :key="index" class="max-w-[25%] min-w-[25%] m-5">
-            <VaImage :src="`${baseUrl}${doc.file_path}`" :fallback-src="noImage" class="h-52" />
+            <VaImage
+              :src="`${baseUrl}${doc.file_path}`"
+              fallback-src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.m.wikipedia.org%2Fwiki%2FFile%3ANo_Image_Available.jpg&psig=AOvVaw3-QrI7kOlw4E9Vv01rDYov&ust=1706237934262000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCNCc6-HF94MDFQAAAAAdAAAAABAE"
+              class="h-52"
+            />
             <VaCardTitle>{{ doc.name }}</VaCardTitle>
             <VaCardContent>
               <p>
@@ -83,7 +87,7 @@
   import { computed, ref } from 'vue'
   import { useRoute } from 'vue-router'
   import { getAllDocumentTypes, getClientDocuments, uploadClientDocument } from '../../services/request'
-  import noImage from '../../assets/images/noimage.png'
+  // import noImage from '../../assets/images/noimage.png'
   import moment from 'moment'
   import { useToast } from 'vuestic-ui'
   const { init, notify, close, closeAll } = useToast()
