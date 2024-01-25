@@ -319,7 +319,7 @@ const router = createRouter({
 
 router.beforeEach(async (to) => {
   // redirect to login page if not logged in and trying to access a restricted page
-  const publicPages = ['/auth/login']
+  const publicPages = ['/auth/login', '/auth/signup', '/auth/recover-password']
   const authRequired = !publicPages.includes(to.path)
   const auth: any = useAuthStore()
   const user: any = useUsersStore()
@@ -328,7 +328,9 @@ router.beforeEach(async (to) => {
     // auth.returnUrl = to.fullPath;
     return '/auth/login'
   } else {
-    user.getCurrentUser()
+    if(auth.accessToken) {
+      user.getCurrentUser()
+    }
   }
 })
 

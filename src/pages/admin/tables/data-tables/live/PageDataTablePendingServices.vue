@@ -28,6 +28,7 @@
     >
       <template #cell(created_at)="{ value }">{{ moment(value).format('L') }}</template>
       <template #cell(client)="{ rowIndex }">{{ `${pendingPageServices[rowIndex].client.first_name} ${pendingPageServices[rowIndex].client.last_name}` }}</template>
+      <template #cell(type)="{ rowIndex }">{{ `${pendingPageServices[rowIndex].client.groups.length === 0 ? 'Individual' : pendingPageServices[rowIndex].client.groups[0].name}` }}</template>
       <template #cell(actions)="{ rowIndex }">
         <VaButton size="large" preset="plain" icon="output" @click="gotoProfile(rowIndex)" />
       </template>
@@ -133,6 +134,10 @@
     {
       key: 'charge',
       label: 'Charge',
+    },
+    {
+      key: 'type',
+      label: 'Type',
     },
     {
       key: 'actions',
