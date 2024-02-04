@@ -10,6 +10,8 @@
           </template>
 
           <packages v-if="currentTab.content === 'Services'" />
+          <groups v-if="currentTab.content === 'Groups'" />
+          <logs v-if="currentTab.content === 'Logs'" />
         </VaTabs>
       </VaCardContent>
     </VaCard>
@@ -24,14 +26,16 @@
   import { useRoute } from 'vue-router'
   import { getClientRemarks } from '../../services/request'
   import Packages from './Tabs/Packages.vue'
+  import Groups from './Tabs/Groups.vue'
+  import Logs from './Tabs/Logs.vue'
   import moment from 'moment'
 
   const route = useRoute()
 
   const TABS = [
     { icon: 'feed', title: 'Services', content: 'Services' },
-    { icon: 'person', title: 'Groups', content: 'Profile content' },
-    { icon: 'mail', title: 'Logs', content: 'Messages content' },
+    { icon: 'person', title: 'Groups', content: 'Groups' },
+    { icon: 'mail', title: 'Logs', content: 'Logs' },
   ]
   const tabs = ref<any>(TABS)
   const remarks = ref<any>({})

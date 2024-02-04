@@ -197,6 +197,26 @@ export const getClientPackages = async (id: any) => {
   return res
 }
 
+export const getClientGroups = async (id: any) => {
+  const res = await fetchWrapper.get(`${baseUrl}${APIs.GET_CLIENT_GROUPS}/${id}`, null)
+
+  return res
+}
+
+export const getActionLogs = async (id: any) => {
+  const res = await fetchWrapper.get(`${baseUrl}${APIs.GET_ACTION_LOGS}/${id}/0`, null)
+
+  return res
+}
+
+export const getTransactionLogs = async (id: any) => {
+  const res = await fetchWrapper.get(`${baseUrl}${APIs.GET_TRANSACTION_LOGS}/${id}/0`, null)
+
+  return res
+}
+
+
+
 export const addClientPackage = async (client_id: any) => {
   const res = await fetchWrapper.post(`${baseUrl}${APIs.ADD_CLIENT_PACKAGE}`, {
     client_id: client_id,
